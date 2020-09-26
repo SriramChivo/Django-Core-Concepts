@@ -1,0 +1,12 @@
+<h1>
+    {% include "classBasedCoreApp/TemplateBasics.html" with obj=Inheritobj value=Inheritvalue floati=InheritFloat%}
+    {{hello}}
+    {%for i in emptyforloop%}
+    {{i}}
+    {%empty%}
+    <h1>
+        Sorry this object is empty try again..
+    </h1>
+    {%endfor%}
+    {{Inheritobj|striptags}}
+</h1>

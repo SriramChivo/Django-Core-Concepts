@@ -1,0 +1,358 @@
+In [1]: from Relationships.models import Address,City
+
+In [2]: Address.objects.all()
+Out[2]: <QuerySet [<Address: Address object (1)>, <Address: Address object (2)>, <Address: Address object (3)>]>
+
+In [3]: Address.objects.all()[0] or Address.objects..first
+Out[3]: <Address: Address object (1)>
+
+In [4]: temp=Address.objects.all()
+
+In [5]: temp.city
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-5-7c107907efa8> in <module>
+----> 1 temp.city
+
+AttributeError: 'QuerySet' object has no attribute 'city'
+
+In [6]: temp.City
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-6-3c660607cff5> in <module>
+----> 1 temp.City
+
+AttributeError: 'QuerySet' object has no attribute 'City'
+
+In [7]: temp=Address.objects.all()[0]
+
+In [8]: temp.City
+Out[8]: <City: Thanjavur>
+
+In [9]: City.objects.all()
+Out[9]: <QuerySet [<City: Thanjavur>, <City: Chennai>]>
+
+In [10]: City.objects.all()[0]
+Out[10]: <City: Thanjavur>
+
+In [11]: temp1=City.objects.all()[0] or City.objects..first
+
+In [12]: temp1.address_set().HouseNo
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-12-50359c4cabc5> in <module>
+----> 1 temp1.address_set().HouseNo
+
+TypeError: __call__() missing 1 required keyword-only argument: 'manager'
+
+In [13]: temp1.address_set.HouseNo
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-13-346042968c03> in <module>
+----> 1 temp1.address_set.HouseNo
+
+AttributeError: 'RelatedManager' object has no attribute 'HouseNo'
+
+In [14]: temp1.address_set.HouseNum
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-14-ebcf27c774b6> in <module>
+----> 1 temp1.address_set.HouseNum
+
+AttributeError: 'RelatedManager' object has no attribute 'HouseNum'
+
+In [15]: temp1.address_set.Housenum
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-15-52ca8ede8559> in <module>
+----> 1 temp1.address_set.Housenum
+
+AttributeError: 'RelatedManager' object has no attribute 'Housenum'
+
+In [16]: temp1.address_set
+Out[16]: <django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager at 0xaf7370>
+
+In [17]: temp1.address_set.Streetname
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-17-e13e39cc1252> in <module>
+----> 1 temp1.address_set.Streetname
+
+AttributeError: 'RelatedManager' object has no attribute 'Streetname'
+
+In [18]: temp1
+Out[18]: <City: Thanjavur>
+
+In [19]: temp1.address_set.all()
+Out[19]: <QuerySet [<Address: Address object (1)>, <Address: Address object (3)>]>
+
+In [20]: temp1.address_set.all()[0].Streetname or temp1.objects.first.Streetname
+Out[20]: 'bandhamanickappa street'
+
+################################################################################
+In [3]: from Relationships.models import City
+
+In [4]: City.objects.first
+Out[4]: <bound method BaseManager._get_queryset_methods.<locals>.create_method.<locals>.manager_method of <django.db.models.manager.Manager object at 0x0881A850>>
+
+In [5]: City.objects.first()
+Out[5]: <City: Thanjavur>
+
+In [6]: temp=City.objects.first()
+
+In [7]: temp.__class__
+Out[7]: Relationships.models.City
+
+In [8]: class=temp.__class__
+  File "<ipython-input-8-192c84a64b8c>", line 1
+    class=temp.__class__
+         ^
+SyntaxError: invalid syntax
+
+
+In [9]: class1=temp.__class__
+
+In [10]: type(class1)
+Out[10]: django.db.models.base.ModelBase
+
+In [11]: class1.objects.all()
+Out[11]: <QuerySet [<City: Thanjavur>, <City: Chennai>]>
+
+#############################################################################
+
+
+In [3]: from Relationships.models import City
+
+In [4]: City.objects.first
+Out[4]: <bound method BaseManager._get_queryset_methods.<locals>.create_method.<locals>.manager_method of <django.db.models.manager.Manager object at 0x0881A850>>
+
+In [5]: City.objects.first()
+Out[5]: <City: Thanjavur>
+
+In [6]: temp=City.objects.first()
+
+In [7]: temp.__class__
+Out[7]: Relationships.models.City
+
+In [8]: class=temp.__class__
+  File "<ipython-input-8-192c84a64b8c>", line 1
+    class=temp.__class__
+         ^
+SyntaxError: invalid syntax
+
+
+In [9]: class1=temp.__class__
+
+In [10]: type(class1)
+Out[10]: django.db.models.base.ModelBase
+
+In [11]: class1.objects.all()
+Out[11]: <QuerySet [<City: Thanjavur>, <City: Chennai>]>
+
+In [12]: from Relationships import Address
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+<ipython-input-12-ac6702ec5df7> in <module>
+----> 1 from Relationships import Address
+
+ImportError: cannot import name 'Address' from 'Relationships' (C:\Users\raaja\OneDrive\Desktop\CoreConcepts\Relationships\__init__.py)
+
+In [13]: from Relationships.models import Address
+
+In [14]: object1=Address.objects.first()
+
+In [15]: city=object1.City
+
+In [16]: city
+Out[16]: <City: Thanjavur>
+
+In [17]: city.__class__ (Reverse call which object calls his class(Model) ie city is an object of address(Model) which calls his own class City(Model) using __class__ )
+Out[17]: Relationships.models.City
+
+In [18]: CityClass=city.__class__ #Getting the City without importing the City model just by
+    ...:  accessing Address model which associated with the foreignkey (ie City) make an ins
+    ...: tance to that field and get the model class using __class__ will give the City mode
+    ...: l then create an instance access its attributes
+
+In [19]: CityClass.Zipcode
+Out[19]: <django.db.models.query_utils.DeferredAttribute at 0x3bc4810>
+
+In [20]: obj=CityClass.first()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-20-477dd2176c60> in <module>
+----> 1 obj=CityClass.first()
+
+AttributeError: type object 'City' has no attribute 'first'
+
+In [21]: obj=CityClass.objects.first()
+
+In [22]: obj.Zipcode
+Out[22]: '613009'
+#################################################################################
+
+
+In [23]: Address.objects.all()
+Out[23]: <QuerySet [<Address: Address object (1)>, <Address: Address object (2)>, <Address: Address object (3)>]>
+
+In [24]: getAddress=City.objects.all()
+
+In [25]: getAddress
+Out[25]: <QuerySet [<City: Thanjavur>, <City: Chennai>]>
+
+In [26]: getAddress=City.objects.last()
+
+In [27]: getAddress
+Out[27]: <City: Chennai>
+
+In [28]: addressRes=Address.objects.filter(City=getAddress)
+
+In [29]: addressRes
+Out[29]: <QuerySet [<Address: Address object (2)>]>
+
+In [30]: addressRes=Address.objects.get(City=getAddress)
+
+In [31]: addressRes
+Out[31]: <Address: Address object (2)>
+
+In [32]: addressRes.Housenum
+Out[32]: 1234
+
+In [33]: addressRes.City
+Out[33]: <City: Chennai>    #here Line 33 is exactly equals to the line 27 using queryset as line 30 instead using address_set that reverse one
+
+
+#########################################################################################################
+
+                     MANYTOMANY RELATIONSHIPS
+
+In [17]: from Relationships.models import Toppings
+
+In [18]: top=Pizza.objects.first()
+
+In [19]: top
+Out[19]: <Pizza: GingerBread>
+
+In [20]: toppings=top.toppings
+
+In [21]: toppings
+Out[21]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0xbac5d0>
+
+In [22]: toppings.all()
+Out[22]: <QuerySet [<Toppings: Peperoni>, <Toppings: ChiilliBro>]>
+
+In [23]: topp=toppings.first()
+
+In [24]: topp
+Out[24]: <Toppings: Peperoni>
+
+In [25]: topp.pizza_set
+Out[25]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0xb74550>
+
+In [26]: topp.pizza_set.all()
+Out[26]: <QuerySet [<Pizza: GingerBread>]>
+
+In [27]: topp=toppings.last()
+
+In [28]: topp
+Out[28]: <Toppings: ChiilliBro>
+
+In [29]: topp.all()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-29-fa329d48c8a2> in <module>
+----> 1 topp.all()
+
+AttributeError: 'Toppings' object has no attribute 'all'
+
+In [30]: topp.Topname
+Out[30]: 'ChiilliBro'
+
+In [31]: topp.pizza_set
+Out[31]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0xffded0>
+
+In [32]: topp.pizza_set.all()
+Out[32]: <QuerySet [<Pizza: GingerBread>, <Pizza: Margaritaa>]>
+
+In [33]: topp.pizza_set.last()
+Out[33]: <Pizza: Margaritaa>
+
+In [34]: li=topp.pizza_set.last()
+
+In [35]: li.toppings
+Out[35]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0xb8a5b0>
+
+In [36]: li.toppings.all()
+Out[36]: <QuerySet [<Toppings: ChiilliBro>, <Toppings: ChiilliBro>]>
+
+In [37]: from Relationships.models import Pizza
+
+In [38]: from Relationships.models import Toppings
+
+In [39]: Toppings.objects.all()
+Out[39]: <QuerySet [<Toppings: Peperoni>, <Toppings: ChiilliBro>, <Toppings: Sweetypie>, <Toppings: Peperoni>, <Toppings: ChiilliBro>]>
+
+In [40]: fis=Toppings.objects.first()
+
+In [41]: fis
+Out[41]: <Toppings: Peperoni>
+
+In [42]: fis.pizza_set.all()
+Out[42]: <QuerySet [<Pizza: GingerBread>, <Pizza: Margaritaa>]>
+
+In [43]: fis=Toppings.objects.get(Toppings=Sweetypie)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-43-a85fd1662ae1> in <module>
+----> 1 fis=Toppings.objects.get(Toppings=Sweetypie)
+
+NameError: name 'Sweetypie' is not defined
+
+In [44]: fis=Toppings.objects.get(Topname=Sweetypie)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-44-722bf1359a33> in <module>
+----> 1 fis=Toppings.objects.get(Topname=Sweetypie)
+
+NameError: name 'Sweetypie' is not defined
+
+In [45]: fis=Toppings.objects.get(Topname='Sweetypie')
+
+In [46]: fis
+Out[46]: <Toppings: Sweetypie>
+
+In [47]: temp=fis
+
+In [48]: temp.pizza_set.all()
+Out[48]: <QuerySet [<Pizza: Margaritaa>]>
+
+In [49]: from Relationships.models import Pizza
+
+In [50]: from Relationships.models import Toppings
+
+In [51]: fis=Toppings.objects.get(Topname='Sweetypie')
+
+In [52]: fis
+Out[52]: <Toppings: Sweetypie>
+
+In [53]: fis.pizza_set.all()
+Out[53]: <QuerySet [<Pizza: Margaritaa>, <Pizza: GingerBread>]>
+
+In [54]: get=fis.pizza_set.last()
+
+In [55]: get
+Out[55]: <Pizza: Margaritaa>
+
+In [56]: get.toppings
+Out[56]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0xee6210>
+
+In [57]: get.toppings.all()
+Out[57]: <QuerySet [<Toppings: Peperoni>, <Toppings: ChiilliBro>, <Toppings: Sweetypie>, <Toppings: Peperoni>, <Toppings: ChiilliBro>]>
+
+In [58]: get=fis.pizza_set.first()
+
+In [59]: get
+Out[59]: <Pizza: GingerBread>
+
+In [60]: get.toppings.all()
+Out[60]: <QuerySet [<Toppings: Sweetypie>]>

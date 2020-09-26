@@ -1,0 +1,65 @@
+<html>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+<h1>
+    Welcome To my Site
+</h1>
+<form action="." method='GET'>
+    <input type="text" placeholder="Search" name='GetObj'>
+</form>
+
+<a href="/create/{{ele.id}}" style=padding-left:5px;>
+    <button>
+        Create a new post
+    </button>
+</a>
+
+{%for ele in form%}
+
+<h1>
+    {{ele.first_name}}
+</h1>
+<a href="/update/{{ele.id}}" style=padding-left:5px;>
+    <button>
+        Update
+    </button>
+</a>
+<a id='delete' href="/delete/{{ele.id}}" style=padding-left:5px;>
+    <button>
+        Delete
+    </button>
+</a>
+<a id='delete1' href="/view/{{ele.id}}" style=padding-left:5px;>
+    <button>
+        View
+    </button>
+</a>
+
+{%endfor%}
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+<script>
+    $('document').ready(function () {
+        $('a#delete').on('click', function (e) {
+            if (confirm('Are you sure i want to delete this????')) {
+                console.log('InsideIf')
+
+            } else {
+                console.log('InsideElse')
+                e.preventDefault();
+            }
+        });
+    });
+</script>
+
+</html>

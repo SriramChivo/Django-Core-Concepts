@@ -1,0 +1,56 @@
+<h1>
+    lets seee
+</h1>
+
+<p>
+    <p>{{obj}}</p>
+    <!--{{obj|escape}} same as above django use escape default to all tags-->
+    <!--Auto ecaped Html tags in render template with <b></b> tags meant it wont make bolder in html instead put as string with tags-->
+    <p>
+        {{obj|safe}}
+        <!--Result:Bolded one treated a html not as string,safe equals "I know what I'm doing" output the content 'as is'.-->
+    </p>
+    <p>
+        {% autoescape on %}
+        <!--on means escape applied to all variables inside this scope-->
+        {{obj}}
+        {% endautoescape %}
+    </p>
+    <p>
+        {% autoescape off %}
+        <!--off means safe applied to all variables inside this scope-->
+        {{obj}}
+        {% endautoescape %}
+    </p>
+    <p>
+        {{float|floatformat}}
+    </p>
+    <!--FLoatformai convert long float to default two digits like 1.23 if we give floatformat:3 result will be 1.234 -->
+    <p>
+        {{ value|first }}
+        <!--To print first element from the list-->
+    </p>
+    <p>
+        <!--Filters inside the block by passing all the filter with pipes-->
+        {% filter linebreaks|lower %}
+        This text will be linebreaked, and will appear in all lowercase.
+        {% endfilter %}
+    </p>
+    <p>
+        {% firstof var1 var2 var3 %}
+        <!--equivalent to-->
+        {% if var1 %}
+        {{ var1 }}
+        {% elif var2 %}
+        {{ var2 }}
+        {% elif var3 %}
+        {{ var3 }}
+        {% endif %}
+    </p>
+    <p>
+        {% if messages|length >= 100 %}
+        You have lots of messages today!
+        {% endif %}
+    </p>
+
+</p>
